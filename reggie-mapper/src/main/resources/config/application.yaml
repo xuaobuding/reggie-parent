@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/reggie?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false
+      username: root
+      password: root
+
+mybatis:
+  # 别名包
+  type-aliases-package: com.itheima.reggie.domain
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    # 开启驼峰命名规则映射
+    map-underscore-to-camel-case: true
+    # 控制台打印SQL日志
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+pagehelper:
+  # 指定分页插件针对哪种数据库进行分页，不同数据库分页SQL有差异
+  helper-dialect: mysql
+  # 合理化设置，默认false，
+  # Default value is false。 When this parameter is set to true,
+  # pageNum <= 0 will query the first page,
+  # PageNum> pages (over the total number),will query the last page.
+  reasonable: true

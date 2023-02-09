@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--mapper接口的全限定类名-->
+<mapper namespace="com.itheima.reggie.mapper.EmployeeMapper">
+    <sql id="baseColumns">id,name,username,password,phone,sex,id_number,status,create_time,update_time,create_user,update_user</sql>
+
+    <!--    mapper接口的方法名以及表名-->
+    <select id="employee" resultType="employee">
+        select
+        <include refid="baseColumns"></include>
+        from employee
+    </select>
+    <select id="getByUsername" resultType="employee">
+        select
+        <include refid="baseColumns"></include>
+        from employee
+        where username = #{usernamae}
+
+    </select>
+    <select id="getByphone" resultType="employee">
+        select
+        <include refid="baseColumns"></include>
+        from employee
+        where phone = #{phone}
+    </select>
+    <select id="getByIdNumber" resultType="employee">
+        select
+        <include refid="baseColumns"></include>
+        from employee
+        where id_number = #{IdNumber}
+    </select>
+    <select id="page" resultType="employee">
+        select
+        <include refid="baseColumns"></include>
+        from employee
+        <where>
+            <if test="name !=null and name !=''">
+              name like #{name}
+            </if>
+        </where>
+       order by update_time DESC
+    </select>
+    <insert id="insert">
+        insert into employee(
+            id,
+            'name',
+            username,
+            'password',
+            phone,
+            sex,
+            id_number,
+            create_user,
+            update_user
+        )values (
+            #{id},
+            #{name},
+            #{username},
+            #{password},
+            #{phone},
+            #{sex},
+            #{idNumber},
+            #{createUser},
+            #{updateUser}
+                )
+    </insert>
+</mapper>
